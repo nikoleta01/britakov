@@ -82,10 +82,14 @@ function ProductsSection() {
           variant="h3"
           component="h2"
           align="center"
+          color="#fff"
           gutterBottom
           sx={{ mb: 6, fontWeight: "bold" }}
         >
-          Naše <span style={{ color: "#ffc107" }}>Produkty</span>
+          Naše{" "}
+          <Typography component="span" variant="inherit" color="primary.main">
+            Produkty
+          </Typography>
         </Typography>
 
         <Grid container spacing={4}>
@@ -170,13 +174,12 @@ function ProductsSection() {
           ))}
         </Grid>
 
-        <Box sx={{ textAlign: "center", mt: 6 }}>
+        <Box mt={6} sx={{ textAlign: "center" }}>
           <Link href="/produkty">
             <Button
               variant="outlined"
-              color="secondary"
               size="large"
-              sx={{ borderRadius: "24px" }}
+              sx={{ borderRadius: "24px", color: "#fff" }}
             >
               Zobraziť všetky produkty
             </Button>

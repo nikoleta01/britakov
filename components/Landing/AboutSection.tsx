@@ -59,12 +59,10 @@ function AboutSection() {
                 p: 3,
                 borderRadius: "24px",
                 bgcolor: "background.paper",
+                color: "#fff",
                 boxShadow:
                   "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",
                 transition: "transform 0.2s ease-in-out",
-                "&:hover": {
-                  transform: "translateY(-4px)",
-                },
               }}
             >
               <Box sx={{ color: "primary.main", mb: 2 }}>{feature.icon}</Box>

@@ -8,13 +8,13 @@ import {
   useTheme,
   useMediaQuery,
   Container,
-  Button,
   IconButton,
 } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Image from "next/image";
 import Link from "next/link";
+import CustomButton from "./common/Button";
 
 interface CarouselImage {
   src: string;
@@ -24,8 +24,7 @@ interface CarouselImage {
   buttons?: {
     text: string;
     link: string;
-    variant: "contained" | "outlined";
-    color: "primary" | "secondary";
+    icon?: React.ElementType;
   }[];
 }
 
@@ -50,7 +49,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
     slidesToShow: 1,
     swipe: true,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
+    autoplaySpeed: 4000,
     swipeToSlide: true,
     arrows: false,
     pauseOnHover: true,
@@ -249,39 +249,50 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                 >
                   {images[currentSlide]?.description || ""}
                 </Typography>
-                <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+                <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                   {images[currentSlide]?.buttons?.map((button, index) => (
                     <Link
                       key={index}
                       href={button.link}
                       passHref
-                      scroll={false}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <Button
-                        variant={button.variant}
-                        color={button.color}
-                        onClick={(e) => {
-                          if (button.link.startsWith("#")) {
-                            e.preventDefault();
-                            const element = document.querySelector(button.link);
-                            element?.scrollIntoView({ behavior: "smooth" });
-                          }
-                        }}
-                        sx={{
-                          borderRadius: "24px",
-                          px: 3,
-                          py: 1,
-                          mt: 2,
-                          fontWeight: "bold",
-                          textTransform: "none",
-                          "&:hover": {
-                            transform: "translateY(-2px)",
-                            transition: "transform 0.2s",
-                          },
-                        }}
-                      >
-                        {button.text}
-                      </Button>
+                      {button.icon ? (
+                        <IconButton
+                          onClick={() => {
+                            window.open(button.link, "_blank");
+                          }}
+                          sx={{
+                            mr: 1,
+                            backgroundColor: "transparent",
+                            color: "#fff",
+                            "&:hover": {
+                              backgroundColor: "transparent",
+                              transform: "scale(1.2)",
+                              transition: "transform 0.2s ease-in-out",
+                            },
+                          }}
+                        >
+                          {React.createElement(button.icon, {
+                            fontSize: "large",
+                          })}
+                        </IconButton>
+                      ) : (
+                        <CustomButton
+                          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                            if (button.link.startsWith("#")) {
+                              e.preventDefault();
+                              const element = document.querySelector(
+                                button.link
+                              );
+                              element?.scrollIntoView({ behavior: "smooth" });
+                            }
+                          }}
+                        >
+                          {button.text}
+                        </CustomButton>
+                      )}
                     </Link>
                   ))}
                 </Box>

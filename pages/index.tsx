@@ -1,11 +1,12 @@
 import { Container, Typography, Grid } from "@mui/material";
 import Layout from "../components/Layout";
-import { NextPage } from "next";
 import ImageCarousel from "../components/ImageCarousel";
 import AboutSection from "../components/Landing/AboutSection";
 import Map from "../components/Map";
 import ContactInfo from "../components/Landing/ContactInfo";
 import ProductsSection from "../components/Landing/ProductsSection";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 interface CarouselImage {
   src: string;
@@ -15,8 +16,7 @@ interface CarouselImage {
   buttons?: {
     text: string;
     link: string;
-    variant: "contained" | "outlined";
-    color: "primary" | "secondary";
+    icon?: React.ElementType;
   }[];
 }
 
@@ -27,7 +27,18 @@ const carouselImages: CarouselImage[] = [
     subtitle: "TRADÍCIA A KVALITA",
     description:
       "Tradičné postupy a moderný dizajn vytvárajú dokonalú harmóniu. Zachovávame tradičné postupy ručného kovania v ohni a dôraz kladieme na precízne prevedenie každého detailu.",
-    buttons: [],
+    buttons: [
+      {
+        text: "",
+        link: "https://www.facebook.com/britakov",
+        icon: FacebookIcon,
+      },
+      {
+        text: "",
+        link: "https://www.instagram.com/britakov_kovacsvo",
+        icon: InstagramIcon,
+      },
+    ],
   },
   {
     src: "/images/britakov5.jpg",
@@ -35,7 +46,12 @@ const carouselImages: CarouselImage[] = [
     subtitle: "PRECÍZNE SPRACOVANIE",
     description:
       "Každý detail našich výrobkov je spracovaný s najvyššou precíznosťou a dôrazom na kvalitu.",
-    buttons: [],
+    buttons: [
+      {
+        text: "Naše produkty",
+        link: "#produkty",
+      },
+    ],
   },
   {
     src: "/images/britakov8.jpg",
@@ -46,17 +62,14 @@ const carouselImages: CarouselImage[] = [
       {
         text: "Naše produkty",
         link: "#produkty",
-        variant: "contained",
-        color: "primary",
       },
     ],
   },
 ];
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <Layout>
-      {/* Hero Carousel Section */}
       <ImageCarousel images={carouselImages} />
 
       <AboutSection />
