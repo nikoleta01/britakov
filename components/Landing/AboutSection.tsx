@@ -39,12 +39,17 @@ const features: Feature[] = [
 
 function AboutSection() {
   return (
-    <Container sx={{ py: { xs: 6, md: 10 } }}>
+    <Container sx={{ py: 6 }}>
       <Typography
         variant="h3"
         component="h2"
         gutterBottom
-        sx={{ color: "primary.main", fontWeight: "bold", mb: 4 }}
+        sx={{
+          color: "primary.main",
+          fontWeight: "bold",
+          mb: 4,
+          textAlign: "center",
+        }}
       >
         O nás
       </Typography>

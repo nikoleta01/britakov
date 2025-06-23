@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 
 function Exterier() {
   return (

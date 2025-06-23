@@ -1,4 +1,4 @@
-import { colors, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -8,8 +8,10 @@ const theme = createTheme({
       default: "#1B1B1B",
       paper: "#2A2A2A",
     },
-    error: {
-      main: colors.red.A400,
+    text: {
+      primary: "#E0E0E0", // Body text
+      secondary: "#B0B0B0", // Subtext
+      disabled: "#7A7A7A", // Disabled text
     },
   },
   typography: {

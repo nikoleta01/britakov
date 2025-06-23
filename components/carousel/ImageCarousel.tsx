@@ -8,13 +8,11 @@ import {
   useTheme,
   useMediaQuery,
   Container,
-  IconButton,
 } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Image from "next/image";
 import Link from "next/link";
-import CustomButton from "./common/Button";
+import CustomButton from "../common/Button";
+import SliderArrow from "./SliderArrow";
 
 interface CarouselImage {
   src: string;
@@ -24,7 +22,6 @@ interface CarouselImage {
   buttons?: {
     text: string;
     link: string;
-    icon?: React.ElementType;
   }[];
 }
 
@@ -104,45 +101,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
         {!isSmallScreen && (
           <>
-            <IconButton
-              onClick={handlePrev}
-              sx={{
-                position: "absolute",
-                left: 24,
-                top: "50%",
-                transform: "translateY(-50%)",
-                zIndex: 10,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                color: "#fff",
-                width: 48,
-                height: 48,
-                "&:hover": {
-                  backgroundColor: "rgba(0, 0, 0, 0.8)",
-                },
-              }}
-            >
-              <ArrowBackIosNewIcon />
-            </IconButton>
-
-            <IconButton
-              onClick={handleNext}
-              sx={{
-                position: "absolute",
-                right: 24,
-                top: "50%",
-                transform: "translateY(-50%)",
-                zIndex: 10,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                color: "#fff",
-                width: 48,
-                height: 48,
-                "&:hover": {
-                  backgroundColor: "rgba(0, 0, 0, 0.8)",
-                },
-              }}
-            >
-              <ArrowForwardIosIcon />
-            </IconButton>
+            <SliderArrow direction="left" onClick={handlePrev} />
+            <SliderArrow direction="right" onClick={handleNext} />
           </>
         )}
       </Box>
@@ -194,6 +154,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                     textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
                     position: "relative",
                     paddingBottom: theme.spacing(2),
+                    height: isMobile ? "60px" : "80px",
+                    display: "flex",
+                    alignItems: "center",
                     "&:after": {
                       content: '""',
                       position: "absolute",
@@ -212,9 +175,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
               <Box
                 sx={{
-                  display: "block",
                   mb: 2,
-                  minHeight: "3em",
+                  height: isMobile ? "48px" : "60px",
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
                 <Typography
@@ -236,7 +200,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                   flexDirection: "column",
                   alignItems: "flex-start",
                   gap: 1,
-                  minHeight: "6em",
                 }}
               >
                 <Typography
@@ -245,11 +208,23 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                     color: "#fff",
                     textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
                     mb: 1,
+                    height: isMobile ? "80px" : "100px",
+                    overflow: "hidden",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 4,
+                    WebkitBoxOrient: "vertical",
                   }}
                 >
                   {images[currentSlide]?.description || ""}
                 </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    minHeight: "48px",
+                    alignItems: "center",
+                  }}
+                >
                   {images[currentSlide]?.buttons?.map((button, index) => (
                     <Link
                       key={index}
@@ -258,41 +233,17 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {button.icon ? (
-                        <IconButton
-                          onClick={() => {
-                            window.open(button.link, "_blank");
-                          }}
-                          sx={{
-                            mr: 1,
-                            backgroundColor: "transparent",
-                            color: "#fff",
-                            "&:hover": {
-                              backgroundColor: "transparent",
-                              transform: "scale(1.2)",
-                              transition: "transform 0.2s ease-in-out",
-                            },
-                          }}
-                        >
-                          {React.createElement(button.icon, {
-                            fontSize: "large",
-                          })}
-                        </IconButton>
-                      ) : (
-                        <CustomButton
-                          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                            if (button.link.startsWith("#")) {
-                              e.preventDefault();
-                              const element = document.querySelector(
-                                button.link
-                              );
-                              element?.scrollIntoView({ behavior: "smooth" });
-                            }
-                          }}
-                        >
-                          {button.text}
-                        </CustomButton>
-                      )}
+                      <CustomButton
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                          if (button.link.startsWith("#")) {
+                            e.preventDefault();
+                            const element = document.querySelector(button.link);
+                            element?.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }}
+                      >
+                        {button.text}
+                      </CustomButton>
                     </Link>
                   ))}
                 </Box>

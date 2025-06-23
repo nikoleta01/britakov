@@ -14,10 +14,11 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 export default function ContactInfo() {
   return (
     <Box
+      py={4}
+      px={4}
       sx={{
-        bgcolor: "white",
-        color: "black",
-        px: 4,
+        bgcolor: "background.light",
+        borderRadius: 4,
       }}
     >
       <Box
@@ -36,7 +37,7 @@ export default function ContactInfo() {
             flexDirection: "column",
           }}
         >
-          <Box sx={{ bgcolor: "white" }}>
+          <Box>
             <Typography
               variant="h6"
               component="h3"

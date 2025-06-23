@@ -1,12 +1,8 @@
-import { Container, Typography, Grid } from "@mui/material";
-import Layout from "../components/Layout";
-import ImageCarousel from "../components/ImageCarousel";
+import Layout from "../components/layout/Layout";
+import ImageCarousel from "../components/carousel/ImageCarousel";
 import AboutSection from "../components/Landing/AboutSection";
-import Map from "../components/Map";
-import ContactInfo from "../components/Landing/ContactInfo";
 import ProductsSection from "../components/Landing/ProductsSection";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import ContactSection from "../components/Landing/ContactSection";
 
 interface CarouselImage {
   src: string;
@@ -16,7 +12,6 @@ interface CarouselImage {
   buttons?: {
     text: string;
     link: string;
-    icon?: React.ElementType;
   }[];
 }
 
@@ -29,14 +24,8 @@ const carouselImages: CarouselImage[] = [
       "Tradičné postupy a moderný dizajn vytvárajú dokonalú harmóniu. Zachovávame tradičné postupy ručného kovania v ohni a dôraz kladieme na precízne prevedenie každého detailu.",
     buttons: [
       {
-        text: "",
-        link: "https://www.facebook.com/britakov",
-        icon: FacebookIcon,
-      },
-      {
-        text: "",
-        link: "https://www.instagram.com/britakov_kovacsvo",
-        icon: InstagramIcon,
+        text: "Naše produkty",
+        link: "#produkty",
       },
     ],
   },
@@ -71,37 +60,9 @@ const Home = () => {
   return (
     <Layout>
       <ImageCarousel images={carouselImages} />
-
-      <AboutSection />
-
       <ProductsSection />
-
-      <Container sx={{ my: 6 }}>
-        <Grid container>
-          <Grid size={{ xs: 12, md: 5 }}>
-            <Typography
-              variant="h4"
-              component="h2"
-              gutterBottom
-              sx={{ fontWeight: 700, color: "primary.main", mb: 4 }}
-            >
-              Kontaktné informácie
-            </Typography>
-            <ContactInfo />
-          </Grid>
-          <Grid size={{ xs: 12, md: 7 }}>
-            <Typography
-              variant="h4"
-              component="h2"
-              gutterBottom
-              sx={{ fontWeight: 700, color: "primary.main", mb: 4 }}
-            >
-              Nájdete nás
-            </Typography>
-            <Map />
-          </Grid>
-        </Grid>
-      </Container>
+      <AboutSection />
+      <ContactSection />
     </Layout>
   );
 };
