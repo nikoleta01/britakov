@@ -3,10 +3,14 @@ import HandymanIcon from "@mui/icons-material/Handyman";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import ArchitectureIcon from "@mui/icons-material/Architecture";
 import ShieldIcon from "@mui/icons-material/Shield";
+
 import type { StaticImageData } from "next/image";
-import about1 from "../../src/images/about/about1.jpg";
-import about2 from "../../src/images/about/about2.jpg";
-import about3 from "../../src/images/about/about3.jpg";
+import Image from "next/image";
+
+import about1 from "../../src/images/about/1.jpg";
+import about2 from "../../src/images/about/2.jpg";
+import about3 from "../../src/images/about/3.jpg";
+import about4 from "../../src/images/about/4.jpg";
 
 interface Feature {
   icon: React.ReactNode;
@@ -40,7 +44,7 @@ const features: Feature[] = [
   {
     icon: <ShieldIcon sx={{ fontSize: 40 }} />,
     title: "Ochrana proti korózii",
-    image: about3,
+    image: about4,
     description:
       "Záruku proti korózii zabezpečujeme žiarovým zinkovaním. Pri povrchovej úprave okrem tradičnej čiernej farby ponúkame širokú škálu odtieňov podľa vzorkovníka RAL, farby kladivkové, grafitové a zrnkové. Ponúkame aj možnosť patinovania zlatou, striebornou, medenou a zelenou patinou.",
   },
@@ -79,9 +83,8 @@ function AboutSection() {
                 boxShadow:
                   "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",
                 transition: "all 0.3s ease-in-out",
-                backgroundImage: `url(${feature.image.src})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                cursor: "pointer",
+                // Overlay that changes opacity on hover
                 "&::before": {
                   content: '""',
                   position: "absolute",
@@ -90,18 +93,35 @@ function AboutSection() {
                   right: 0,
                   bottom: 0,
                   backgroundColor: "background.paper",
-                  opacity: 0.7,
+                  opacity: 0.6,
                   transition: "opacity 0.3s ease-in-out",
+                  zIndex: 2,
                 },
                 "&:hover::before": {
                   opacity: 1,
                 },
-                "& > *": {
+                // Content positioning
+                "& > *:not(img)": {
                   position: "relative",
-                  zIndex: 1,
+                  zIndex: 3,
                 },
               }}
             >
+              {/* Next.js Image as background */}
+              <Image
+                src={feature.image.src}
+                alt={feature.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  zIndex: 1,
+                }}
+                priority={index < 4} // Load first 4 images with priority
+              />
+
+              {/* Content */}
               <Box sx={{ color: "primary.main", mb: 2 }}>{feature.icon}</Box>
               <Typography
                 variant="h6"
