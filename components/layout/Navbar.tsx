@@ -15,6 +15,8 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import Image from "next/image";
 
 interface NavItem {
@@ -26,6 +28,7 @@ const navItems: NavItem[] = [
   { label: "Úvod", href: "/" },
   { label: "Produkty", href: "/produkty" },
   { label: "Kontakt", href: "/kontakt" },
+  { label: "Referencie", href: "/referencie" },
 ];
 
 const Navbar: React.FC = () => {
@@ -50,7 +53,10 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: "#fff", boxShadow: 2 }}>
+    <AppBar
+      position="sticky"
+      sx={{ backgroundColor: "background.default", boxShadow: 2 }}
+    >
       <Container>
         <Toolbar disableGutters>
           <Link href="/" style={{ textDecoration: "none" }}>
@@ -109,7 +115,7 @@ const Navbar: React.FC = () => {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
-                  color="primary"
+                  color="inherit"
                 >
                   <MenuIcon />
                 </IconButton>
@@ -143,6 +149,24 @@ const Navbar: React.FC = () => {
                       </MenuItem>
                     </Link>
                   ))}
+                  <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
+                    <IconButton
+                      component="a"
+                      href="https://www.instagram.com/britakov/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <InstagramIcon sx={{ color: "text.primary" }} />
+                    </IconButton>
+                    <IconButton
+                      component="a"
+                      href="https://www.facebook.com/britakov"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FacebookIcon sx={{ color: "text.primary" }} />
+                    </IconButton>
+                  </MenuItem>
                 </Menu>
               </Box>
             </Box>
@@ -150,10 +174,13 @@ const Navbar: React.FC = () => {
 
           {/* Desktop menu */}
           <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-end"
+            alignItems="center"
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
-              justifyContent: "flex-end",
             }}
           >
             {navItems.map((item) => (
@@ -164,7 +191,7 @@ const Navbar: React.FC = () => {
                     my: 2,
                     color: isActive(item.href)
                       ? "primary.main"
-                      : "secondary.main",
+                      : "text.primary",
                     display: "block",
                     backgroundColor: "transparent",
                     fontWeight: 600,
@@ -181,6 +208,33 @@ const Navbar: React.FC = () => {
                 </Button>
               </Link>
             ))}
+            <IconButton
+              component="a"
+              href="https://www.instagram.com/britakov/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramIcon
+                sx={{
+                  color: "text.primary",
+                  "&:hover": { color: "primary.main" },
+                }}
+              />
+            </IconButton>
+
+            <IconButton
+              component="a"
+              href="https://www.facebook.com/britakov"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FacebookIcon
+                sx={{
+                  color: "text.primary",
+                  "&:hover": { color: "primary.main" },
+                }}
+              />
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>

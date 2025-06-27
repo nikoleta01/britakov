@@ -8,13 +8,11 @@ import {
   useTheme,
   useMediaQuery,
   Container,
-  Button,
-  IconButton,
 } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Image from "next/image";
 import Link from "next/link";
+import CustomButton from "../common/Button";
+import SliderArrow from "./SliderArrow";
 
 interface CarouselImage {
   src: string;
@@ -24,8 +22,6 @@ interface CarouselImage {
   buttons?: {
     text: string;
     link: string;
-    variant: "contained" | "outlined";
-    color: "primary" | "secondary";
   }[];
 }
 
@@ -50,7 +46,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
     slidesToShow: 1,
     swipe: true,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
+    autoplaySpeed: 4000,
     swipeToSlide: true,
     arrows: false,
     pauseOnHover: true,
@@ -104,45 +101,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
         {!isSmallScreen && (
           <>
-            <IconButton
-              onClick={handlePrev}
-              sx={{
-                position: "absolute",
-                left: 24,
-                top: "50%",
-                transform: "translateY(-50%)",
-                zIndex: 10,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                color: "#fff",
-                width: 48,
-                height: 48,
-                "&:hover": {
-                  backgroundColor: "rgba(0, 0, 0, 0.8)",
-                },
-              }}
-            >
-              <ArrowBackIosNewIcon />
-            </IconButton>
-
-            <IconButton
-              onClick={handleNext}
-              sx={{
-                position: "absolute",
-                right: 24,
-                top: "50%",
-                transform: "translateY(-50%)",
-                zIndex: 10,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                color: "#fff",
-                width: 48,
-                height: 48,
-                "&:hover": {
-                  backgroundColor: "rgba(0, 0, 0, 0.8)",
-                },
-              }}
-            >
-              <ArrowForwardIosIcon />
-            </IconButton>
+            <SliderArrow direction="left" onClick={handlePrev} />
+            <SliderArrow direction="right" onClick={handleNext} />
           </>
         )}
       </Box>
@@ -194,6 +154,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                     textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
                     position: "relative",
                     paddingBottom: theme.spacing(2),
+                    height: isMobile ? "60px" : "80px",
+                    display: "flex",
+                    alignItems: "center",
                     "&:after": {
                       content: '""',
                       position: "absolute",
@@ -212,14 +175,16 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
               <Box
                 sx={{
-                  display: "block",
                   mb: 2,
-                  minHeight: "3em",
+                  height: isMobile ? "48px" : "60px",
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
                 <Typography
                   variant={isMobile ? "h6" : "h5"}
                   component="h2"
+                  pt={4}
                   sx={{
                     fontWeight: "bold",
                     color: "#fff",
@@ -236,7 +201,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                   flexDirection: "column",
                   alignItems: "flex-start",
                   gap: 1,
-                  minHeight: "6em",
                 }}
               >
                 <Typography
@@ -245,43 +209,42 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                     color: "#fff",
                     textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
                     mb: 1,
+                    height: isMobile ? "80px" : "100px",
+                    overflow: "hidden",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 4,
+                    WebkitBoxOrient: "vertical",
                   }}
                 >
                   {images[currentSlide]?.description || ""}
                 </Typography>
-                <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    minHeight: "48px",
+                    alignItems: "center",
+                  }}
+                >
                   {images[currentSlide]?.buttons?.map((button, index) => (
                     <Link
                       key={index}
                       href={button.link}
                       passHref
-                      scroll={false}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <Button
-                        variant={button.variant}
-                        color={button.color}
-                        onClick={(e) => {
+                      <CustomButton
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                           if (button.link.startsWith("#")) {
                             e.preventDefault();
                             const element = document.querySelector(button.link);
                             element?.scrollIntoView({ behavior: "smooth" });
                           }
                         }}
-                        sx={{
-                          borderRadius: "24px",
-                          px: 3,
-                          py: 1,
-                          mt: 2,
-                          fontWeight: "bold",
-                          textTransform: "none",
-                          "&:hover": {
-                            transform: "translateY(-2px)",
-                            transition: "transform 0.2s",
-                          },
-                        }}
                       >
                         {button.text}
-                      </Button>
+                      </CustomButton>
                     </Link>
                   ))}
                 </Box>

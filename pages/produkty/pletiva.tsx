@@ -1,5 +1,5 @@
 import { Container, Typography, Grid, Card, Box } from "@mui/material";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 import Image from "next/image";
 import TitleDescriptionSection from "../../components/TitleDescriptionSection";
 

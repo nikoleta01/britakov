@@ -1,5 +1,5 @@
 import { Box, Container, Typography, Grid, Card, Button } from "@mui/material";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { NextPage } from "next";
 import router from "next/router";
 import Offer from "../components/Offer";
@@ -16,7 +16,7 @@ interface ProductCategory {
 const productCategories: ProductCategory[] = [
   {
     id: "pletiva",
-    title: "PLETIVÁ",
+    title: "KOVOVÝROBA",
     image: "/images/pletiva.jpg",
     redirectTo: "/produkty/pletiva",
     actionButtonText: "Katalóg",
@@ -25,7 +25,7 @@ const productCategories: ProductCategory[] = [
   },
   {
     id: "interier",
-    title: "INTERIÉR",
+    title: "HUTNÍCKY MATERIÁL",
     image: "/images/interier.jpg",
     redirectTo: "/produkty/interier",
     actionButtonText: "Galéria",
@@ -34,46 +34,12 @@ const productCategories: ProductCategory[] = [
   },
   {
     id: "exterier",
-    title: "EXTERIÉR",
+    title: "SPOJOVACÍ MATERIÁL",
     image: "/images/exterier.jpg",
     redirectTo: "/produkty/exterier",
     actionButtonText: "Galéria",
     description:
       "Nemusíte platiť najviac, aby ste dostali kvalitnú prácu. Pre každý projekt vytvárame prispôsobený plán.",
-  },
-  {
-    id: "material",
-    title: "HUTNÍCKY MATERIÁL",
-    image: "/images/ocel.jpg",
-    redirectTo: "/produkty/material",
-    actionButtonText: "Galéria",
-    description:
-      "Ponúkame široký sortiment kvalitného hutného materiálu pre vaše projekty.",
-  },
-  {
-    id: "brany",
-    title: "GARÁŽOVÉ BRÁNY",
-    image: "/images/garaz.jpg",
-    redirectTo: "/produkty/brany",
-    actionButtonText: "Galéria",
-    description: "Ponúkame široký sortiment garážových brán vrátane montáže.",
-  },
-  {
-    id: "konstrukcie",
-    title: "OCEĽOVÉ KONŠTRUKCIE",
-    image: "/images/konstrukcie.jpg",
-    redirectTo: "/produkty/konstrukcie",
-    actionButtonText: "Galéria",
-    description:
-      "Navrhneme a zrealizujeme oceľové konštrukcie podľa vašich požiadaviek.",
-  },
-  {
-    id: "nerez",
-    title: "NEREZ/SKLO",
-    image: "/images/sklo.jpg",
-    redirectTo: "/produkty/nerez",
-    actionButtonText: "Galéria",
-    description: "Kombinované riešenia z nerezu a skla pre moderný vzhľad.",
   },
 ];
 
@@ -96,6 +62,7 @@ const Products: NextPage = () => {
             component="h1"
             gutterBottom
             sx={{ fontWeight: 700 }}
+            color="primary.main"
           >
             Naše Produkty
           </Typography>
@@ -111,7 +78,7 @@ const Products: NextPage = () => {
       <Container sx={{ mt: 4 }}>
         <Grid container spacing={4}>
           {productCategories.map((category, index) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={index}>
+            <Grid size={{ xs: 12, sm: 4 }} key={index}>
               <Card
                 sx={{
                   height: 300,
@@ -199,7 +166,6 @@ const Products: NextPage = () => {
       <Box
         sx={{
           bgcolor: "#f5f5f5",
-          borderRadius: "24px",
           py: { xs: 6, md: 8 },
           px: { xs: 2, md: 4 },
           mt: 8,
