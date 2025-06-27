@@ -64,7 +64,7 @@ const ContactPage: NextPage = () => {
                 Nájdite nás
               </Typography>
 
-              <Map />
+              <Map src="https://www.google.com/maps?q=Strelnica+241%2F6%2C+Ro%C5%BE%C5%88avsk%C3%A1+Ba%C5%88a%2C+048+01+Ro%C5%BE%C5%88ava&output=embed" />
             </Grid>
           </Grid>
         </Container>
