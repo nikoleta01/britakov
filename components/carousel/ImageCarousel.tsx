@@ -184,6 +184,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                 <Typography
                   variant={isMobile ? "h6" : "h5"}
                   component="h2"
+                  pt={4}
                   sx={{
                     fontWeight: "bold",
                     color: "#fff",

@@ -62,6 +62,7 @@ const Products: NextPage = () => {
             component="h1"
             gutterBottom
             sx={{ fontWeight: 700 }}
+            color="primary.main"
           >
             Naše Produkty
           </Typography>

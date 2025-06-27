@@ -1,6 +1,10 @@
 import { Box } from "@mui/material";
 
-export default function Map() {
+interface MapProps {
+  src: string;
+}
+
+export default function Map({ src }: MapProps) {
   return (
     <Box
       sx={{
@@ -11,8 +15,8 @@ export default function Map() {
       }}
     >
       <iframe
-        title="Britakov Location Map"
-        src="https://www.google.com/maps?q=Strelnica+241%2F6%2C+Ro%C5%BE%C5%88avsk%C3%A1+Ba%C5%88a%2C+048+01+Ro%C5%BE%C5%88ava&output=embed"
+        title="Britakov"
+        src={src}
         width="100%"
         height="400"
         style={{
@@ -20,6 +24,7 @@ export default function Map() {
           maxWidth: "600px",
           minWidth: "250px",
           borderRadius: "24px",
+          filter: "invert(90%) hue-rotate(180deg)",
         }}
         allowFullScreen={true}
         loading="lazy"

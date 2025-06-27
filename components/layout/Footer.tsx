@@ -5,15 +5,14 @@ import {
   Grid,
   Typography,
   Divider,
-  Link as MuiLink,
   IconButton,
 } from "@mui/material";
-import Link from "next/link";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
@@ -33,15 +32,24 @@ const Footer: React.FC = () => {
             <Typography variant="body2" sx={{ mb: 2 }}>
               Umelecko – remeselné kováčstvo
             </Typography>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <Box display="flex" alignItems="center" mb={1}>
               <LocationOnIcon sx={{ mr: 1, fontSize: 20 }} />
               <Typography variant="body2">
                 Lipová 13, 04941 Krásnohorské Podhradie
               </Typography>
             </Box>
-            <Typography variant="body2" sx={{ mb: 2, ml: 4 }}>
-              Prevádzka: Strelnica 6, 04801 Rožňava
-            </Typography>
+            <Box display="flex" alignItems="center" mb={1}>
+              <LocationOnIcon sx={{ mr: 1, fontSize: 20 }} />
+              <Typography variant="body2">
+                Predajňa hutného materiálu: Strelnica 6, 04801 Rožňava
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center" mb={1}>
+              <LocationOnIcon sx={{ mr: 1, fontSize: 20 }} />
+              <Typography variant="body2">
+                Predajňa spojovacieho materiálu: Šafárikova 112, 04801 Rožňava
+              </Typography>
+            </Box>
           </Grid>
 
           <Grid size={{ xs: 12, md: 4 }}>
@@ -51,23 +59,25 @@ const Footer: React.FC = () => {
             >
               Kontakt
             </Typography>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-              <PhoneIcon sx={{ mr: 1, fontSize: 20 }} />
-              <Typography variant="body2">Konateľ: +421 902 322 787</Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <Box display="flex" alignItems="center" mb={1}>
               <PhoneIcon sx={{ mr: 1, fontSize: 20 }} />
               <Typography variant="body2">
-                Ekonomické oddelenie: +421 948 779 790
+                Konateľ Ondrej Hatvanský: +421 902 322 787
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <Box display="flex" alignItems="center" mb={1}>
+              <PhoneIcon sx={{ mr: 1, fontSize: 20 }} />
+              <Typography variant="body2">
+                Sekretariát: +421 948 779 790
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center" mb={1}>
               <PhoneIcon sx={{ mr: 1, fontSize: 20 }} />
               <Typography variant="body2">
                 Predajňa hutného materiálu: +421 910 702 704
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <Box display="flex" alignItems="center" mb={1}>
               <EmailIcon sx={{ mr: 1, fontSize: 20 }} />
               <Typography variant="body2">britakov@britakov.sk</Typography>
             </Box>
@@ -80,34 +90,14 @@ const Footer: React.FC = () => {
             >
               Navigácia
             </Typography>
-            <Link href="/" legacyBehavior>
-              <MuiLink
-                underline="hover"
-                sx={{ display: "block", mb: 1, color: "#fff" }}
-                component="a"
-              >
-                Úvod
-              </MuiLink>
-            </Link>
-            <Link href="/produkty" legacyBehavior>
-              <MuiLink
-                underline="hover"
-                sx={{ display: "block", mb: 1, color: "#fff" }}
-                component="a"
-              >
-                Produkty
-              </MuiLink>
-            </Link>
-            <Link href="/kontakt" legacyBehavior>
-              <MuiLink
-                underline="hover"
-                sx={{ display: "block", mb: 1, color: "#fff" }}
-                component="a"
-              >
-                Kontakt
-              </MuiLink>
-            </Link>
-            <Box sx={{ mt: 2 }}>
+            <Box display="flex" flexDirection="column">
+              <Link href="/">Úvod</Link>
+              <Link href="/produkty">Produkty</Link>
+              <Link href="/kontakt">Kontakt</Link>
+              <Link href="/referencie">Referencie</Link>
+            </Box>
+
+            <Box mt={2}>
               <Typography
                 variant="h6"
                 sx={{ fontWeight: "bold", mb: 2, color: "primary.main" }}
@@ -120,7 +110,7 @@ const Footer: React.FC = () => {
                   href="https://www.instagram.com/britakov"
                   target="_blank"
                   rel="noopener noreferrer"
-                  sx={{ color: "#fff" }}
+                  sx={{ color: "text.primary" }}
                 >
                   <InstagramIcon />
                 </IconButton>
@@ -129,7 +119,7 @@ const Footer: React.FC = () => {
                   href="https://www.facebook.com/britakov"
                   target="_blank"
                   rel="noopener noreferrer"
-                  sx={{ color: "#fff" }}
+                  sx={{ color: "text.primary" }}
                 >
                   <FacebookIcon />
                 </IconButton>

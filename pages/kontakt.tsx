@@ -2,7 +2,7 @@ import { Box, Container, Typography, Grid, Card } from "@mui/material";
 import Layout from "../components/layout/Layout";
 import { NextPage } from "next";
 import Map from "../components/Map";
-import ContactInfo from "../components/Landing/ContactInfo";
+import ContactInfo from "../components/ContactInfo";
 
 const ContactPage: NextPage = () => {
   return (
