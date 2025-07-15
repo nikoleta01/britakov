@@ -91,10 +91,18 @@ const Footer: React.FC = () => {
               Navigácia
             </Typography>
             <Box display="flex" flexDirection="column">
-              <Link href="/">Úvod</Link>
-              <Link href="/produkty">Produkty</Link>
-              <Link href="/kontakt">Kontakt</Link>
-              <Link href="/referencie">Referencie</Link>
+              <Link style={{ color: "white" }} href="/">
+                Úvod
+              </Link>
+              <Link style={{ color: "white" }} href="/produkty">
+                Produkty
+              </Link>
+              <Link style={{ color: "white" }} href="/kontakt">
+                Kontakt
+              </Link>
+              <Link style={{ color: "white" }} href="/referencie">
+                Referencie
+              </Link>
             </Box>
 
             <Box mt={2}>

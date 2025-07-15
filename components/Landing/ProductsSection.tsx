@@ -1,34 +1,47 @@
-import { Box, Button, Container, Grid, Link, Typography } from "@mui/material";
-
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { StaticImageData } from "next/image";
+import pletiva from "../../src/images/products/pletiva.jpg";
+import zabradlie from "../../src/images/products/zabradlie.jpg";
+import spojovaci from "../../src/images/products/spojovaci.jpg";
 import ProductCard from "../ProductCard";
+import Link from "next/link";
 
 interface ProductCategory {
   title: string;
   description: string;
-  image: string;
+  image: StaticImageData;
   redirectTo: string;
+  subcategories?: string[];
 }
 
 const productCategories: ProductCategory[] = [
   {
     title: "Kovovýroba",
     description:
-      "Široký výber pletív pre ploty, záhrady a bezpečnostné účely. Od klasických až po moderné dizajny, všetko v najvyššej kvalite.",
-    image: "/images/pletiva.jpg",
-    redirectTo: "/produkty/pletiva",
+      "Široký výber zábradlí, brán, oceľových konštrukcií a rôznych doplnkov. Od klasických až po moderné dizajny, všetko v najvyššej kvalite.",
+    image: zabradlie,
+    redirectTo: "/produkty/kovovyroba",
+    subcategories: [
+      "Brány",
+      "Zábradlia",
+      "Mreže",
+      "Oceľové konštrukcie",
+      "Doplnky",
+    ],
   },
   {
     title: "Hutnícky materiál",
     description:
       "Elegantné kovové prvky pre váš domov. Od zábradlí a schodísk až po dekoratívne prvky, ktoré dodajú vášmu interiéru šarm.",
-    image: "/images/interier.jpg",
+    image: pletiva,
     redirectTo: "/produkty/interier",
+    subcategories: ["Pletivá", "Kotevný materiál"],
   },
   {
     title: "Spojovací materiál",
     description:
       "Trvanlivé kovové výrobky pre exteriér. Ploty, brány, zábradlia a ďalšie prvky, ktoré vydržia všetky poveternostné podmienky.",
-    image: "/images/exterier.jpg",
+    image: spojovaci,
     redirectTo: "/produkty/exterier",
   },
 ];

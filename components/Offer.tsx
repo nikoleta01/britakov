@@ -59,7 +59,7 @@ function Offer() {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
-            bgcolor: "white",
+            bgcolor: "paper.main",
             boxShadow,
           }}
         >
@@ -153,7 +153,7 @@ function Offer() {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
-            bgcolor: "white",
+            bgcolor: "paper.main",
             boxShadow:
               "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",
           }}
@@ -183,7 +183,7 @@ function Offer() {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
-            bgcolor: "white",
+            bgcolor: "paper.main",
             boxShadow,
           }}
         >
@@ -312,7 +312,7 @@ function Offer() {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
-            bgcolor: "white",
+            bgcolor: "paper.main",
             boxShadow,
           }}
         >

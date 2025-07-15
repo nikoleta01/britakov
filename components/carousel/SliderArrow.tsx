@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { IconButton, useTheme, useMediaQuery } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -8,10 +8,13 @@ interface SliderArrowProps {
 }
 
 const SliderArrow = ({ direction, onClick }: SliderArrowProps) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <IconButton
       onClick={onClick}
       sx={{
+        display: isSmallScreen ? "none" : "block",
         position: "absolute",
         [direction]: 24,
         top: "50%",
