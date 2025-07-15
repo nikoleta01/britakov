@@ -1,5 +1,5 @@
 import Layout from "../../components/layout/Layout";
-import TitleDescriptionSection from "../../components/TitleDescriptionSection";
+import TitleDescriptionSection from "../../components/common/TitleDescriptionSection";
 import ProductGallery from "../../components/ProductGallery";
 
 const gallerySections = [
