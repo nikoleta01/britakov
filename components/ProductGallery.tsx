@@ -38,7 +38,11 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           key={sectionIndex}
           sx={{
             width: "100%",
-            bgcolor: sectionIndex % 2 === 0 ? "white" : "grey.100",
+            borderRadius: "24px",
+            bgcolor:
+              sectionIndex % 2 === 0
+                ? "background.default"
+                : "background.paper",
             py: 6,
           }}
         >
@@ -98,7 +102,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
                       cursor: "pointer",
                       transition: "0.3s",
                       "&:hover": {
-                        transform: "translateY(-4px)",
+                        transform: "translateY(-1px)",
                         boxShadow: 4,
                       },
                     }}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import {
   AppBar,
   Box,
@@ -11,6 +11,7 @@ import {
   MenuItem,
   useMediaQuery,
   useTheme,
+  Divider,
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -22,11 +23,30 @@ import Image from "next/image";
 interface NavItem {
   label: string;
   href: string;
+  subcategories?: { label: string; href: string; subcategories?: string[] }[];
 }
 
 const navItems: NavItem[] = [
   { label: "Úvod", href: "/" },
-  { label: "Produkty", href: "/produkty" },
+  {
+    label: "Produkty",
+    href: "/produkty",
+    subcategories: [
+      {
+        label: "Kovovýroba",
+        href: "/produkty/kovovyroba",
+        subcategories: [
+          "Brány",
+          "Zábradlia",
+          "Mreže",
+          "Oceľové konštrukcie",
+          "Doplnky",
+        ],
+      },
+      { label: "Hutnícky materiál", href: "/produkty/interier" },
+      { label: "Spojovací materiál", href: "/produkty/exterier" },
+    ],
+  },
   { label: "Kontakt", href: "/kontakt" },
   { label: "Referencie", href: "/referencie" },
 ];
@@ -36,6 +56,10 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
+  const [anchorElDropdown, setAnchorElDropdown] = useState<HTMLElement | null>(
+    null
+  );
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -43,6 +67,19 @@ const Navbar: React.FC = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleOpenDropdown = (
+    event: React.MouseEvent<HTMLElement>,
+    itemLabel: string
+  ) => {
+    setAnchorElDropdown(event.currentTarget);
+    setOpenDropdown(itemLabel);
+  };
+
+  const handleCloseDropdown = () => {
+    setAnchorElDropdown(null);
+    setOpenDropdown(null);
   };
 
   const isActive = (path: string) => {
@@ -138,16 +175,47 @@ const Navbar: React.FC = () => {
                   }}
                 >
                   {navItems.map((item) => (
-                    <Link key={item.label} href={item.href}>
-                      <MenuItem
-                        onClick={handleCloseNavMenu}
-                        sx={{
-                          color: isActive(item.href) ? "#fff" : "inherit",
-                        }}
-                      >
-                        <Typography textAlign="center">{item.label}</Typography>
-                      </MenuItem>
-                    </Link>
+                    <Fragment key={item.label}>
+                      <Link href={item.href}>
+                        <MenuItem
+                          onClick={handleCloseNavMenu}
+                          sx={{
+                            color: isActive(item.href) ? "#fff" : "inherit",
+                          }}
+                        >
+                          <Typography textAlign="center">
+                            {item.label}
+                          </Typography>
+                        </MenuItem>
+                      </Link>
+                      {item.subcategories && (
+                        <>
+                          <Divider />
+                          {item.subcategories.map((subcategory) => (
+                            <Link
+                              key={subcategory.label}
+                              href={subcategory.href}
+                            >
+                              <MenuItem
+                                onClick={handleCloseNavMenu}
+                                sx={{
+                                  pl: 4,
+                                  color: isActive(subcategory.href)
+                                    ? "#fff"
+                                    : "inherit",
+                                  fontSize: "0.875rem",
+                                }}
+                              >
+                                <Typography textAlign="center">
+                                  {subcategory.label}
+                                </Typography>
+                              </MenuItem>
+                            </Link>
+                          ))}
+                          <Divider />
+                        </>
+                      )}
+                    </Fragment>
                   ))}
                   <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
                     <IconButton
@@ -184,29 +252,102 @@ const Navbar: React.FC = () => {
             }}
           >
             {navItems.map((item) => (
-              <Link key={item.label} href={item.href}>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: isActive(item.href)
-                      ? "primary.main"
-                      : "text.primary",
-                    display: "block",
-                    backgroundColor: "transparent",
-                    fontWeight: 600,
-                    mx: 1,
-                    "&:hover": {
-                      color: "primary.light",
-                    },
-                    "&:active": {
-                      backgroundColor: "transparent",
-                    },
-                  }}
-                >
-                  {item.label}
-                </Button>
-              </Link>
+              <Box
+                key={item.label}
+                sx={{ position: "relative" }}
+                onMouseLeave={handleCloseDropdown}
+                onClick={() => router.push(item.href)}
+              >
+                {item.subcategories ? (
+                  <>
+                    <Button
+                      onMouseEnter={(e) => handleOpenDropdown(e, item.label)}
+                      sx={{
+                        my: 2,
+                        color: isActive(item.href)
+                          ? "primary.main"
+                          : "text.primary",
+                        display: "block",
+                        backgroundColor: "transparent",
+                        fontWeight: 600,
+                        mx: 1,
+                        "&:hover": {
+                          color: "primary.light",
+                        },
+                        "&:active": {
+                          backgroundColor: "transparent",
+                        },
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                    <Menu
+                      anchorEl={anchorElDropdown}
+                      open={openDropdown === item.label}
+                      onClose={handleCloseDropdown}
+                      slotProps={{
+                        paper: {
+                          onMouseLeave: handleCloseDropdown,
+                        },
+                      }}
+                      sx={{
+                        "& .MuiPaper-root": {
+                          backgroundColor: "background.default",
+                          border: "1px solid",
+                          borderColor: "divider",
+                          borderRadius: "8px",
+                          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                          marginTop: "4px",
+                        },
+                      }}
+                    >
+                      <Divider />
+                      {item.subcategories.map((subcategory) => (
+                        <Link key={subcategory.label} href={subcategory.href}>
+                          <MenuItem
+                            onClick={handleCloseDropdown}
+                            sx={{
+                              color: isActive(subcategory.href)
+                                ? "primary.main"
+                                : "text.primary",
+                              "&:hover": {
+                                backgroundColor: "action.hover",
+                                color: "primary.light",
+                              },
+                            }}
+                          >
+                            <Typography>{subcategory.label}</Typography>
+                          </MenuItem>
+                        </Link>
+                      ))}
+                    </Menu>
+                  </>
+                ) : (
+                  <Link href={item.href}>
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        color: isActive(item.href)
+                          ? "primary.main"
+                          : "text.primary",
+                        display: "block",
+                        backgroundColor: "transparent",
+                        fontWeight: 600,
+                        mx: 1,
+                        "&:hover": {
+                          color: "primary.light",
+                        },
+                        "&:active": {
+                          backgroundColor: "transparent",
+                        },
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                  </Link>
+                )}
+              </Box>
             ))}
             <IconButton
               component="a"

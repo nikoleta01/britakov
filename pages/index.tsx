@@ -1,8 +1,9 @@
 import Layout from "../components/layout/Layout";
 import ImageCarousel from "../components/carousel/ImageCarousel";
-import AboutSection from "../components/Landing/AboutSection";
-import ProductsSection from "../components/Landing/ProductsSection";
-import ContactSection from "../components/Landing/ContactSection";
+import AboutSection from "../components/landing/AboutSection";
+import ProductsSection from "../components/landing/ProductsSection";
+import ContactSection from "../components/landing/ContactSection";
+import ScrollToTop from "../components/ScrollToTop";
 
 interface CarouselImage {
   src: string;
@@ -63,6 +64,7 @@ const Home = () => {
       <ProductsSection />
       <AboutSection />
       <ContactSection />
+      <ScrollToTop />
     </Layout>
   );
 };
