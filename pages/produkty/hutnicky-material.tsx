@@ -59,7 +59,7 @@ function Interier() {
   return (
     <Layout>
       <TitleDescriptionSection
-        title="Interiérové výrobky"
+        title="Hutnícky materiál"
         description="Vyberte si zo širokej škály interiérových výrobkov. V ponuke sú výrobky z fotogalérie a návrhy z katalógov."
       />
       <ProductGallery sections={gallerySections} />

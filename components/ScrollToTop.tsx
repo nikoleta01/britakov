@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button, Box } from "@mui/material";
+import { IconButton, Box } from "@mui/material";
 
 function ScrollToTop() {
   const isBrowser = () => typeof window !== "undefined"; //The approach recommended by Next.js
@@ -41,17 +41,17 @@ function ScrollToTop() {
       }}
     >
       {isVisible && (
-        <Button
+        <IconButton
           onClick={scrollToTop}
-          variant="outlined"
           sx={{
-            width: "40px",
-            height: "40px",
+            width: "48px",
+            height: "48px",
             minWidth: "40px",
             padding: 0,
             backgroundColor: "background.paper",
             borderRadius: "50%",
-            borderColor: "primary.main",
+            border: 1,
+            borderColor: "rgba(255, 255, 255, 0.5)",
             color: "white",
             "&:hover": {
               transform: "translateY(-2px)",
@@ -60,7 +60,7 @@ function ScrollToTop() {
           }}
         >
           <KeyboardArrowUpIcon />
-        </Button>
+        </IconButton>
       )}
     </Box>
   );
