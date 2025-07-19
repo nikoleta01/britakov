@@ -1,7 +1,6 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import {
   AppBar,
-  Box,
   Toolbar,
   Typography,
   Button,
@@ -12,6 +11,7 @@ import {
   useMediaQuery,
   useTheme,
   Divider,
+  Box,
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -175,7 +175,7 @@ const Navbar: React.FC = () => {
                   }}
                 >
                   {navItems.map((item) => (
-                    <Fragment key={item.label}>
+                    <Box key={item.label}>
                       <Link href={item.href}>
                         <MenuItem
                           onClick={handleCloseNavMenu}
@@ -189,7 +189,7 @@ const Navbar: React.FC = () => {
                         </MenuItem>
                       </Link>
                       {item.subcategories && (
-                        <>
+                        <Box>
                           <Divider />
                           {item.subcategories.map((subcategory) => (
                             <Link
@@ -213,9 +213,9 @@ const Navbar: React.FC = () => {
                             </Link>
                           ))}
                           <Divider />
-                        </>
+                        </Box>
                       )}
-                    </Fragment>
+                    </Box>
                   ))}
                   <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
                     <IconButton
@@ -259,7 +259,7 @@ const Navbar: React.FC = () => {
                 // onClick={() => router.push(item.href)}
               >
                 {item.subcategories ? (
-                  <>
+                  <Box>
                     <Button
                       onMouseEnter={(e) => handleOpenDropdown(e, item.label)}
                       sx={{
@@ -321,7 +321,7 @@ const Navbar: React.FC = () => {
                         </Link>
                       ))}
                     </Menu>
-                  </>
+                  </Box>
                 ) : (
                   <Link href={item.href}>
                     <Button

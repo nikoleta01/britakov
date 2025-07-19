@@ -34,7 +34,7 @@ const productCategories: ProductCategory[] = [
     description:
       "Elegantné kovové prvky pre váš domov. Od zábradlí a schodísk až po dekoratívne prvky, ktoré dodajú vášmu interiéru šarm.",
     image: pletiva,
-    redirectTo: "/produkty/interier",
+    redirectTo: "/produkty/hutnicky-material",
     subcategories: ["Pletivá", "Kotevný materiál"],
   },
   {
@@ -42,7 +42,7 @@ const productCategories: ProductCategory[] = [
     description:
       "Trvanlivé kovové výrobky pre exteriér. Ploty, brány, zábradlia a ďalšie prvky, ktoré vydržia všetky poveternostné podmienky.",
     image: spojovaci,
-    redirectTo: "/produkty/exterier",
+    redirectTo: "/produkty/spojovaci-material",
   },
 ];
 

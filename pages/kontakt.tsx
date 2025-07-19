@@ -1,74 +1,51 @@
-import { Box, Container, Typography, Grid, Card } from "@mui/material";
+import { Container, Typography, Grid } from "@mui/material";
 import Layout from "../components/layout/Layout";
 import { NextPage } from "next";
 import Map from "../components/Map";
-import ContactInfo from "../components/ContactInfo";
+import TitleDescriptionSection from "../components/common/TitleDescriptionSection";
+import ContactInfoCard from "../components/common/ContactInfoCard";
 
 const ContactPage: NextPage = () => {
   return (
     <Layout>
-      {/* Hero section */}
-      <Box
-        sx={{
-          bgcolor: "secondary.main",
-          color: "white",
-          pt: 8,
-          pb: 6,
-          position: "relative",
-        }}
-      >
-        <Container>
-          <Typography
-            variant="h2"
-            component="h1"
-            gutterBottom
-            sx={{ fontWeight: 700 }}
-          >
-            Kontaktujte nás
-          </Typography>
-          <Typography variant="h6" component="p" sx={{ maxWidth: 800 }}>
-            Máte otázky? Potrebujete cenovú ponuku? Kontaktujte nás telefonicky
-            alebo emailom.
-          </Typography>
-        </Container>
-      </Box>
+      <TitleDescriptionSection
+        title="Kontaktujte nás"
+        description="Máte otázky? Potrebujete cenovú ponuku? Kontaktujte nás telefonicky alebo emailom."
+      />
 
-      <Box sx={{ bgcolor: "#f5f5f5", width: "100%" }}>
-        <Container sx={{ py: 8 }}>
-          <Grid container spacing={6}>
-            {/* Contact Information */}
-            <Grid size={{ xs: 12, md: 5 }}>
-              <Typography
-                variant="h4"
-                component="h2"
-                gutterBottom
-                sx={{ fontWeight: 700, color: "primary.main", mb: 4 }}
-              >
-                Kontaktné informácie
-              </Typography>
+      <Container sx={{ my: 4 }}>
+        <Grid container spacing={6}>
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Typography
+              variant="h4"
+              component="h2"
+              gutterBottom
+              sx={{ fontWeight: 700, color: "primary.main", mb: 4 }}
+            >
+              Kontaktné informácie
+            </Typography>
 
-              <Card
-                sx={{ mb: 4, bgcolor: "white", borderRadius: "24px", p: 4 }}
-              >
-                <ContactInfo />
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 7 }}>
-              <Typography
-                variant="h4"
-                component="h2"
-                gutterBottom
-                sx={{ fontWeight: 700, color: "primary.main", mb: 4 }}
-              >
-                Nájdite nás
-              </Typography>
-
-              <Map src="https://www.google.com/maps?q=Strelnica+241%2F6%2C+Ro%C5%BE%C5%88avsk%C3%A1+Ba%C5%88a%2C+048+01+Ro%C5%BE%C5%88ava&output=embed" />
-            </Grid>
+            <ContactInfoCard
+              title="Predajňa hutného materiálu"
+              location="Strelnica 6, 048 01 Rožňava"
+              phone="+421 910 702 704"
+            />
           </Grid>
-        </Container>
-      </Box>
+
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Typography
+              variant="h4"
+              component="h2"
+              gutterBottom
+              sx={{ fontWeight: 700, color: "primary.main", mb: 4 }}
+            >
+              Nájdite nás
+            </Typography>
+
+            <Map src="https://www.google.com/maps?q=Strelnica+241%2F6%2C+Ro%C5%BE%C5%88avsk%C3%A1+Ba%C5%88a%2C+048+01+Ro%C5%BE%C5%88ava&output=embed" />
+          </Grid>
+        </Grid>
+      </Container>
     </Layout>
   );
 };
