@@ -14,7 +14,9 @@ const SliderArrow = ({ direction, onClick }: SliderArrowProps) => {
     <IconButton
       onClick={onClick}
       sx={{
-        display: isSmallScreen ? "none" : "block",
+        display: isSmallScreen ? "none" : "flex",
+        alignItems: "center",
+        justifyContent: "center",
         position: "absolute",
         [direction]: 24,
         top: "50%",
@@ -23,7 +25,10 @@ const SliderArrow = ({ direction, onClick }: SliderArrowProps) => {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         color: "#fff",
         width: 48,
+        border: 1,
+        borderColor: "rgba(255, 255, 255, 0.5)",
         height: 48,
+        borderRadius: "50%",
         "&:hover": {
           backgroundColor: "rgba(0, 0, 0, 0.8)",
           transition: "transform 0.2s",

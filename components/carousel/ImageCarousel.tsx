@@ -157,16 +157,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                     height: isMobile ? "60px" : "80px",
                     display: "flex",
                     alignItems: "center",
-                    "&:after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "60px",
-                      height: "3px",
-                      backgroundColor:
-                        theme.palette.secondary.main || "#ffc107",
-                    },
                   }}
                 >
                   UMELECKO-REMESELNÉ KOVÁČSTVO

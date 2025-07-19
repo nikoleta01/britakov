@@ -43,8 +43,8 @@ const navItems: NavItem[] = [
           "Doplnky",
         ],
       },
-      { label: "Hutnícky materiál", href: "/produkty/interier" },
-      { label: "Spojovací materiál", href: "/produkty/exterier" },
+      { label: "Hutnícky materiál", href: "/produkty/hutnicky-material" },
+      { label: "Spojovací materiál", href: "/produkty/spojovaci-material" },
     ],
   },
   { label: "Kontakt", href: "/kontakt" },
@@ -256,7 +256,7 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 sx={{ position: "relative" }}
                 onMouseLeave={handleCloseDropdown}
-                onClick={() => router.push(item.href)}
+                // onClick={() => router.push(item.href)}
               >
                 {item.subcategories ? (
                   <>
