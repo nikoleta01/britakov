@@ -1,7 +1,8 @@
 import { Container, Tab, Tabs, Typography, Box } from "@mui/material";
 import Layout from "../../components/layout/Layout";
 import TitleDescriptionSection from "../../components/common/TitleDescriptionSection";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import ProductGallery from "../../components/ProductGallery";
 import TabPanel from "../../components/TabPanel";
 
@@ -59,7 +60,18 @@ const gallerySections = [
 ];
 
 export default function Kovovyroba() {
+  const router = useRouter();
   const [value, setValue] = useState(0);
+
+  // Handle tab navigation from URL query parameter
+  useEffect(() => {
+    if (router.isReady && router.query.tab) {
+      const tabIndex = parseInt(router.query.tab as string, 10);
+      if (!isNaN(tabIndex) && tabIndex >= 0 && tabIndex <= 4) {
+        setValue(tabIndex);
+      }
+    }
+  }, [router.isReady, router.query.tab]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

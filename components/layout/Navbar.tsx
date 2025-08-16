@@ -190,7 +190,25 @@ const Navbar: React.FC = () => {
                       </Link>
                       {item.subcategories && (
                         <Box>
-                          <Divider />
+                          <Divider color="rgba(255, 255, 255, 0.65)" />
+                          {/* View All Products option for mobile */}
+                          <Link href={item.href}>
+                            <MenuItem
+                              onClick={handleCloseNavMenu}
+                              sx={{
+                                pl: 4,
+                                color: isActive(item.href) ? "#fff" : "inherit",
+                                fontSize: "0.875rem",
+                                fontWeight: 600,
+                                borderBottom:
+                                  "1px solid rgba(255, 255, 255, 0.1)",
+                              }}
+                            >
+                              <Typography textAlign="center">
+                                Všetky produkty
+                              </Typography>
+                            </MenuItem>
+                          </Link>
                           {item.subcategories.map((subcategory) => (
                             <Link
                               key={subcategory.label}
@@ -199,7 +217,7 @@ const Navbar: React.FC = () => {
                               <MenuItem
                                 onClick={handleCloseNavMenu}
                                 sx={{
-                                  pl: 4,
+                                  pl: 6,
                                   color: isActive(subcategory.href)
                                     ? "#fff"
                                     : "inherit",
@@ -301,12 +319,33 @@ const Navbar: React.FC = () => {
                         },
                       }}
                     >
+                      {/* View All Products option */}
+                      <Link href={item.href}>
+                        <MenuItem
+                          onClick={handleCloseDropdown}
+                          sx={{
+                            color: isActive(item.href)
+                              ? "primary.main"
+                              : "text.primary",
+                            borderBottom: "1px solid",
+                            borderColor: "divider",
+                            fontWeight: 600,
+                            "&:hover": {
+                              backgroundColor: "action.hover",
+                              color: "primary.light",
+                            },
+                          }}
+                        >
+                          <Typography>Všetky produkty</Typography>
+                        </MenuItem>
+                      </Link>
                       <Divider />
                       {item.subcategories.map((subcategory) => (
                         <Link key={subcategory.label} href={subcategory.href}>
                           <MenuItem
                             onClick={handleCloseDropdown}
                             sx={{
+                              pl: 3,
                               color: isActive(subcategory.href)
                                 ? "primary.main"
                                 : "text.primary",
