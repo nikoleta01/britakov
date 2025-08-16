@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "../../styles/theme";
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 import Footer from "./Footer";
 
 interface LayoutProps {

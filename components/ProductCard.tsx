@@ -128,6 +128,14 @@ function ProductCard({ category }: ProductCardProps) {
                 <Chip
                   key={index}
                   variant="outlined"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (category.title === "Kovovýroba") {
+                      router.push(`${category.redirectTo}?tab=${index}`);
+                    } else {
+                      router.push(category.redirectTo);
+                    }
+                  }}
                   sx={{
                     backgroundColor: "hsla(0, 0.00%, 0.00%, 0.14)",
                     color: "text.primary",
@@ -135,6 +143,7 @@ function ProductCard({ category }: ProductCardProps) {
                     borderRadius: "14px",
                     fontSize: "0.7rem",
                     height: "24px",
+                    cursor: "pointer",
                     "&:hover": {
                       backgroundColor: "primary.main",
                       color: "white",

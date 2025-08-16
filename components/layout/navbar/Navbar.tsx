@@ -5,20 +5,20 @@ import {
   Typography,
   Button,
   Container,
-  IconButton,
-  Menu,
-  MenuItem,
   useMediaQuery,
   useTheme,
   Divider,
   Box,
+  Menu,
+  MenuItem,
+  IconButton,
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import MenuIcon from "@mui/icons-material/Menu";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Image from "next/image";
+import MobileMenu from "./MobileMenu";
 
 interface NavItem {
   label: string;
@@ -96,6 +96,7 @@ const Navbar: React.FC = () => {
     >
       <Container>
         <Toolbar disableGutters>
+          {/* Desktop Logo */}
           <Link href="/" style={{ textDecoration: "none" }}>
             <Box
               sx={{
@@ -116,6 +117,7 @@ const Navbar: React.FC = () => {
             </Box>
           </Link>
 
+          {/* Mobile Layout */}
           {isMobile && (
             <Box
               sx={{
@@ -125,7 +127,7 @@ const Navbar: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              {/* Logo on left */}
+              {/* Mobile Logo */}
               <Link href="/" style={{ textDecoration: "none" }}>
                 <Box
                   sx={{
@@ -145,102 +147,17 @@ const Navbar: React.FC = () => {
                 </Box>
               </Link>
 
-              {/* Menu on right */}
-              <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                  }}
-                >
-                  {navItems.map((item) => (
-                    <Box key={item.label}>
-                      <Link href={item.href}>
-                        <MenuItem
-                          onClick={handleCloseNavMenu}
-                          sx={{
-                            color: isActive(item.href) ? "#fff" : "inherit",
-                          }}
-                        >
-                          <Typography textAlign="center">
-                            {item.label}
-                          </Typography>
-                        </MenuItem>
-                      </Link>
-                      {item.subcategories && (
-                        <Box>
-                          <Divider />
-                          {item.subcategories.map((subcategory) => (
-                            <Link
-                              key={subcategory.label}
-                              href={subcategory.href}
-                            >
-                              <MenuItem
-                                onClick={handleCloseNavMenu}
-                                sx={{
-                                  pl: 4,
-                                  color: isActive(subcategory.href)
-                                    ? "#fff"
-                                    : "inherit",
-                                  fontSize: "0.875rem",
-                                }}
-                              >
-                                <Typography textAlign="center">
-                                  {subcategory.label}
-                                </Typography>
-                              </MenuItem>
-                            </Link>
-                          ))}
-                          <Divider />
-                        </Box>
-                      )}
-                    </Box>
-                  ))}
-                  <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
-                    <IconButton
-                      component="a"
-                      href="https://www.instagram.com/britakov/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <InstagramIcon sx={{ color: "text.primary" }} />
-                    </IconButton>
-                    <IconButton
-                      component="a"
-                      href="https://www.facebook.com/britakov"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FacebookIcon sx={{ color: "text.primary" }} />
-                    </IconButton>
-                  </MenuItem>
-                </Menu>
-              </Box>
+              {/* Mobile Menu Component */}
+              <MobileMenu
+                navItems={navItems}
+                anchorElNav={anchorElNav}
+                handleOpenNavMenu={handleOpenNavMenu}
+                handleCloseNavMenu={handleCloseNavMenu}
+              />
             </Box>
           )}
 
-          {/* Desktop menu */}
+          {/* Desktop Menu */}
           <Box
             display="flex"
             flexDirection="row"
@@ -256,7 +173,6 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 sx={{ position: "relative" }}
                 onMouseLeave={handleCloseDropdown}
-                // onClick={() => router.push(item.href)}
               >
                 {item.subcategories ? (
                   <Box>
@@ -301,12 +217,33 @@ const Navbar: React.FC = () => {
                         },
                       }}
                     >
+                      {/* View All Products option */}
+                      <Link href={item.href}>
+                        <MenuItem
+                          onClick={handleCloseDropdown}
+                          sx={{
+                            color: isActive(item.href)
+                              ? "primary.main"
+                              : "text.primary",
+                            borderBottom: "1px solid",
+                            borderColor: "divider",
+                            fontWeight: 600,
+                            "&:hover": {
+                              backgroundColor: "action.hover",
+                              color: "primary.light",
+                            },
+                          }}
+                        >
+                          <Typography>Všetky produkty</Typography>
+                        </MenuItem>
+                      </Link>
                       <Divider />
                       {item.subcategories.map((subcategory) => (
                         <Link key={subcategory.label} href={subcategory.href}>
                           <MenuItem
                             onClick={handleCloseDropdown}
                             sx={{
+                              pl: 3,
                               color: isActive(subcategory.href)
                                 ? "primary.main"
                                 : "text.primary",
@@ -349,6 +286,8 @@ const Navbar: React.FC = () => {
                 )}
               </Box>
             ))}
+
+            {/* Desktop Social Icons */}
             <IconButton
               component="a"
               href="https://www.instagram.com/britakov/"
