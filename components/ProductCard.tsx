@@ -26,35 +26,6 @@ interface ProductCardProps {
 }
 
 function ProductCard({ category }: ProductCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const animationStyle = {
-    animation: "gentlePulse 2s ease-in-out infinite",
-    animationDelay: "0s",
-    "@keyframes gentlePulse": {
-      "0%": {
-        transform: "scale(1)",
-        opacity: 1,
-      },
-      "25%": {
-        transform: "scale(1.7)",
-        opacity: 0.8,
-      },
-      "75%": {
-        transform: "scale(1.3)",
-        opacity: 1,
-      },
-      "100%": {
-        transform: "scale(1)",
-        opacity: 1,
-      },
-    },
-  };
-
   return (
     <Card
       sx={{
@@ -114,63 +85,47 @@ function ProductCard({ category }: ProductCardProps) {
         >
           {category.description}
         </Typography>
-        <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-          {category?.subcategories && category.subcategories.length > 0 && (
-            <Box
-              sx={{
-                display: "flex",
-                gap: 0.8,
-                flexWrap: "wrap",
-                my: 2,
-              }}
-            >
-              {category.subcategories.map((subcategory, index) => (
-                <Chip
-                  key={index}
-                  variant="outlined"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (category.title === "Kovovýroba") {
-                      router.push(`${category.redirectTo}?tab=${index}`);
-                    } else {
-                      router.push(category.redirectTo);
-                    }
-                  }}
-                  sx={{
-                    backgroundColor: "hsla(0, 0.00%, 0.00%, 0.14)",
-                    color: "text.primary",
-                    border: "1px solid rgba(255, 255, 255, 0.3)",
-                    borderRadius: "14px",
-                    fontSize: "0.7rem",
-                    height: "24px",
-                    cursor: "pointer",
-                    "&:hover": {
-                      backgroundColor: "primary.main",
-                      color: "white",
-                      borderColor: "primary.light",
-                    },
-                  }}
-                  label={subcategory}
-                />
-              ))}
-            </Box>
-          )}
-        </Collapse>
-      </CardContent>
-      <CardActions
-        disableSpacing
-        sx={{ justifyContent: "center", p: 0, height: "48px" }}
-      >
         {category?.subcategories && category.subcategories.length > 0 && (
-          <IconButton onClick={handleExpandClick}>
-            {isExpanded ? (
-              <ExpandLessIcon color="primary" />
-            ) : (
-              <ExpandMoreIcon sx={animationStyle} color="primary" />
-            )}
-          </IconButton>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 0.8,
+              flexWrap: "wrap",
+              my: 2,
+            }}
+          >
+            {category.subcategories.map((subcategory, index) => (
+              <Chip
+                key={index}
+                variant="outlined"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (category.title === "Kovovýroba") {
+                    router.push(`${category.redirectTo}?tab=${index}`);
+                  } else {
+                    router.push(category.redirectTo);
+                  }
+                }}
+                sx={{
+                  backgroundColor: "hsla(0, 0.00%, 0.00%, 0.14)",
+                  color: "text.primary",
+                  border: "1px solid rgba(255, 255, 255, 0.3)",
+                  borderRadius: "14px",
+                  fontSize: "0.7rem",
+                  height: "24px",
+                  cursor: "pointer",
+                  "&:hover": {
+                    backgroundColor: "primary.main",
+                    color: "white",
+                    borderColor: "primary.light",
+                  },
+                }}
+                label={subcategory}
+              />
+            ))}
+          </Box>
         )}
-      </CardActions>
+      </CardContent>
     </Card>
   );
 }

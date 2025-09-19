@@ -35,7 +35,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   showContent = true,
 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [currentSlide, setCurrentSlide] = useState(2);
   const sliderRef = useRef<Slider>(null);
@@ -66,6 +65,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
   return (
     <Box sx={{ position: "relative", width: "100%" }}>
+      {/* Main carousel container */}
       <Box
         sx={{
           position: "relative",
@@ -99,121 +99,121 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           ))}
         </Slider>
 
+        {/* Navigation arrows with proper spacing */}
         {!isSmallScreen && (
           <>
-            <SliderArrow direction="left" onClick={handlePrev} />
-            <SliderArrow direction="right" onClick={handleNext} />
-          </>
-        )}
-      </Box>
-
-      {showContent && images.length > 0 && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            background:
-              "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)",
-            zIndex: 1,
-          }}
-        >
-          <Container
-            sx={{
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              position: "relative",
-            }}
-          >
             <Box
               sx={{
-                maxWidth: isMobile ? "100%" : "50%",
-                display: "flex",
-                flexDirection: "column",
                 position: "absolute",
-                left: 0,
+                left: 24,
                 top: "50%",
                 transform: "translateY(-50%)",
-                padding: theme.spacing(4),
+                zIndex: 3,
               }}
             >
-              <Box sx={{ mb: theme.spacing(2) }}>
+              <SliderArrow direction="left" onClick={handlePrev} />
+            </Box>
+            <Box
+              sx={{
+                position: "absolute",
+                right: 24,
+                top: "50%",
+                transform: "translateY(-50%)",
+                zIndex: 3,
+              }}
+            >
+              <SliderArrow direction="right" onClick={handleNext} />
+            </Box>
+          </>
+        )}
+
+        {/* Content overlay with improved positioning */}
+        {showContent && images.length > 0 && (
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              display: "flex",
+              alignItems: "center",
+              background:
+                "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)",
+              zIndex: 2,
+              // Ensure content doesn't overlap with arrows
+              paddingLeft: !isSmallScreen ? "80px" : theme.spacing(3), // 80px gives space for left arrow + margin
+              paddingRight: !isSmallScreen ? "80px" : theme.spacing(3), // 80px gives space for right arrow + margin
+            }}
+          >
+            <Container
+              maxWidth="lg"
+              sx={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  maxWidth: isSmallScreen ? "100%" : "60%", // Slightly wider for better text layout
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: theme.spacing(2),
+                }}
+              >
+                {/* Main title */}
                 <Typography
-                  variant={isMobile ? "h4" : "h2"}
+                  variant={isSmallScreen ? "h4" : "h2"}
                   component="h1"
-                  gutterBottom
                   sx={{
                     fontWeight: 700,
                     color: "#fff",
-                    textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
-                    position: "relative",
-                    paddingBottom: theme.spacing(2),
-                    height: isMobile ? "60px" : "80px",
-                    display: "flex",
-                    alignItems: "center",
+                    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+                    lineHeight: 1.2,
                   }}
                 >
                   UMELECKO-REMESELNÉ KOVÁČSTVO
                 </Typography>
-              </Box>
 
-              <Box
-                sx={{
-                  mb: 2,
-                  height: isMobile ? "48px" : "60px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
+                {/* Subtitle */}
                 <Typography
-                  variant={isMobile ? "h6" : "h5"}
+                  variant={isSmallScreen ? "h6" : "h5"}
                   component="h2"
-                  pt={4}
                   sx={{
                     fontWeight: "bold",
                     color: "#fff",
-                    textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
+                    textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
+                    lineHeight: 1.3,
                   }}
                 >
                   {images[currentSlide]?.subtitle || ""}
                 </Typography>
-              </Box>
 
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: 1,
-                }}
-              >
+                {/* Description */}
                 <Typography
                   variant="body1"
                   sx={{
                     color: "#fff",
-                    textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
-                    mb: 1,
-                    height: isMobile ? "80px" : "100px",
+                    textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+                    lineHeight: 1.5,
+                    maxHeight: isSmallScreen ? "4.5em" : "6em", // Limit height based on line-height
                     overflow: "hidden",
                     display: "-webkit-box",
-                    WebkitLineClamp: 4,
+                    WebkitLineClamp: isSmallScreen ? 3 : 4,
                     WebkitBoxOrient: "vertical",
                   }}
                 >
                   {images[currentSlide]?.description || ""}
                 </Typography>
+
+                {/* Action buttons */}
                 <Box
                   sx={{
                     display: "flex",
                     flexWrap: "wrap",
-                    minHeight: "48px",
-                    alignItems: "center",
+                    gap: theme.spacing(1),
+                    mt: theme.spacing(1),
                   }}
                 >
                   {images[currentSlide]?.buttons?.map((button, index) => (
@@ -239,10 +239,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                   ))}
                 </Box>
               </Box>
-            </Box>
-          </Container>
-        </Box>
-      )}
+            </Container>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

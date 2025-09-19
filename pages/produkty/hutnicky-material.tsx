@@ -87,7 +87,21 @@ function Interier() {
             alignItems: "center",
           }}
         >
-          <Tabs value={value} onChange={handleChange} sx={{ mb: 3 }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            sx={{
+              maxWidth: { xs: "90vw", sm: "80vw", md: "100%" },
+              "& .MuiTabs-scrollableX": {
+                scrollbarWidth: "none",
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              },
+            }}
+          >
             <Tab label="Pletivá" />
             <Tab label="Spojovací a kotevný materiál" />
           </Tabs>

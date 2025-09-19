@@ -4,10 +4,11 @@ import { NextPage } from "next";
 import router from "next/router";
 import TitleDescriptionSection from "../components/common/TitleDescriptionSection";
 import spojovaci from "../src/images/products/spojovaci.jpg";
+import predajna from "../src/images/predajna_spojovaci_material.png";
 import { StaticImageData } from "next/image";
 // import Offer from "../components/Offer";
-import { useState } from "react";
-import { ExpandMore, ExpandLess } from "@mui/icons-material";
+// import { useState } from "react";
+// import { ExpandMore, ExpandLess } from "@mui/icons-material";
 
 interface SubSubcategory {
   title: string;
@@ -34,7 +35,10 @@ const productCategories: ProductCategory[] = [
         title: "Brány",
         subcategories: [{ title: "Moderné brány" }, { title: "Kované brány" }],
       },
-      { title: "Zábradlia" },
+      {
+        title: "Zábradlia",
+        subcategories: [{ title: "Interiér" }, { title: "Exteriér" }],
+      },
       { title: "Mreže" },
       { title: "Oceľové konštrukcie" },
       { title: "Doplnky" },
@@ -56,24 +60,12 @@ const productCategories: ProductCategory[] = [
   {
     id: "exterier",
     title: "SPOJOVACÍ MATERIÁL",
-    image: spojovaci,
+    image: predajna,
     redirectTo: "/produkty/spojovaci-material",
   },
 ];
 
 const Products: NextPage = () => {
-  const [expandedSubcategories, setExpandedSubcategories] = useState<
-    Record<string, boolean>
-  >({});
-
-  const toggleSubcategory = (categoryId: string, subcategoryIndex: number) => {
-    const key = `${categoryId}-${subcategoryIndex}`;
-    setExpandedSubcategories((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
   return (
     <Layout>
       {/* Hero section */}
@@ -86,8 +78,8 @@ const Products: NextPage = () => {
       />
 
       {/* Product tabs */}
-      <Container sx={{ mt: 4 }}>
-        <Grid container spacing={3}>
+      <Container>
+        <Grid container spacing={3} my={4}>
           {productCategories.map((category, index) => (
             <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={index}>
               <Card
@@ -159,113 +151,70 @@ const Products: NextPage = () => {
                           display: "flex",
                           flexDirection: "column",
                           justifyContent: "center",
+                          gap: 1,
                         }}
                       >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 0.8,
-                            flexWrap: "wrap",
-                          }}
-                        >
-                          {category.subcategories.map(
-                            (subcategory, subIndex) => (
-                              <Box key={subIndex}>
-                                <Chip
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    if (subcategory.subcategories) {
-                                      toggleSubcategory(category.id, subIndex);
-                                    }
-                                  }}
-                                  sx={{
-                                    width: "100%",
-                                    backgroundColor:
-                                      "hsla(0, 0.00%, 0.00%, 0.14)",
-                                    color: "white",
-                                    border:
-                                      "1px solid rgba(255, 255, 255, 0.3)",
-                                    borderRadius: "14px",
-                                    fontSize: "0.7rem",
-                                    height: "24px",
-                                    transition: "all 0.2s ease",
-                                    "&:hover": {
-                                      backgroundColor: "primary.main",
-                                      borderColor: "primary.light",
-                                    },
-                                    "& .MuiChip-label": {
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "space-between",
-                                      width: "100%",
-                                    },
-                                  }}
-                                  label={
-                                    <Box
-                                      sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "space-between",
-                                        width: "100%",
-                                      }}
-                                    >
-                                      <span>{subcategory.title}</span>
-                                      {subcategory.subcategories &&
-                                        (expandedSubcategories[
-                                          `${category.id}-${subIndex}`
-                                        ] ? (
-                                          <ExpandLess
-                                            sx={{ fontSize: "16px" }}
-                                          />
-                                        ) : (
-                                          <ExpandMore
-                                            sx={{ fontSize: "16px" }}
-                                          />
-                                        ))}
-                                    </Box>
-                                  }
-                                />
+                        {category.subcategories.map((subcategory, subIndex) => (
+                          <Box key={subIndex}>
+                            {/* Parent category - full width */}
+                            <Chip
+                              sx={{
+                                width: "100%",
+                                backgroundColor: "hsla(0, 0.00%, 0.00%, 0.14)",
+                                color: "primary",
+                                border: "1px solid rgba(255, 255, 255, 0.3)",
+                                borderRadius: "14px",
+                                fontSize: "0.75rem",
+                                height: "28px",
+                                mb: subcategory.subcategories ? 0.5 : 0,
+                                transition: "all 0.2s ease",
+                                "&:hover": {
+                                  backgroundColor: "primary.main",
+                                  borderColor: "primary.light",
+                                },
+                              }}
+                              label={subcategory.title}
+                              onClick={(e) => e.stopPropagation()}
+                            />
 
-                                {/* Sub-subcategories */}
-                                {subcategory.subcategories &&
-                                  expandedSubcategories[
-                                    `${category.id}-${subIndex}`
-                                  ] && (
-                                    <Box sx={{ ml: 2, mt: 0.5 }}>
-                                      {subcategory.subcategories.map(
-                                        (subSubcategory, subSubIndex) => (
-                                          <Chip
-                                            key={subSubIndex}
-                                            sx={{
-                                              width: "100%",
-                                              backgroundColor:
-                                                "hsla(0, 0.00%, 0.00%, 0.08)",
-                                              color: "rgba(255, 255, 255, 0.8)",
-                                              border:
-                                                "1px solid rgba(255, 255, 255, 0.2)",
-                                              borderRadius: "12px",
-                                              fontSize: "0.65rem",
-                                              height: "20px",
-                                              mb: 0.4,
-                                              transition: "all 0.2s ease",
-                                              "&:hover": {
-                                                backgroundColor:
-                                                  "primary.light",
-                                                color: "white",
-                                              },
-                                            }}
-                                            label={subSubcategory.title}
-                                            onClick={(e) => e.stopPropagation()}
-                                          />
-                                        )
-                                      )}
-                                    </Box>
-                                  )}
+                            {/* Child subcategories - horizontal layout */}
+                            {subcategory.subcategories && (
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexWrap: "wrap",
+                                  gap: 0.5,
+                                  mt: 0.5,
+                                }}
+                              >
+                                {subcategory.subcategories.map(
+                                  (subSubcategory, subSubIndex) => (
+                                    <Chip
+                                      key={subSubIndex}
+                                      sx={{
+                                        backgroundColor:
+                                          "hsla(0, 0.00%, 0.00%, 0.08)",
+                                        color: "rgba(255, 255, 255, 0.8)",
+                                        border:
+                                          "1px solid rgba(255, 255, 255, 0.2)",
+                                        borderRadius: "12px",
+                                        fontSize: "0.65rem",
+                                        height: "22px",
+                                        transition: "all 0.2s ease",
+                                        "&:hover": {
+                                          backgroundColor: "primary.light",
+                                          color: "white",
+                                        },
+                                      }}
+                                      label={subSubcategory.title}
+                                      onClick={(e) => e.stopPropagation()}
+                                    />
+                                  )
+                                )}
                               </Box>
-                            )
-                          )}
-                        </Box>
+                            )}
+                          </Box>
+                        ))}
                       </Box>
                     )}
                 </Box>
@@ -273,9 +222,6 @@ const Products: NextPage = () => {
             </Grid>
           ))}
         </Grid>
-        {/* <Box sx={{ my: 4 }}>
-          <Offer />
-        </Box> */}
       </Container>
     </Layout>
   );

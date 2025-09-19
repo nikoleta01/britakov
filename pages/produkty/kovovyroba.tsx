@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ProductGallery from "../../components/ProductGallery";
 import TabPanel from "../../components/TabPanel";
+// import zabradlia from "./zabradlia";
+import GallerySection from "../../components/GallerySection";
+import { gallery } from "./grilovanie";
 
 const gallerySections = [
   {
@@ -91,7 +94,22 @@ export default function Kovovyroba() {
             alignItems: "center",
           }}
         >
-          <Tabs value={value} onChange={handleChange} sx={{ mb: 3 }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            sx={{
+              mb: 3,
+              maxWidth: { xs: "90vw", sm: "80vw", md: "100%" },
+              "& .MuiTabs-scrollableX": {
+                scrollbarWidth: "none",
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              },
+            }}
+          >
             <Tab label="Brány" />
             <Tab label="Zábradlia" />
             <Tab label="Mreže" />
@@ -104,8 +122,7 @@ export default function Kovovyroba() {
           </TabPanel>
 
           <TabPanel value={value} index={1}>
-            <Typography variant="h5">Zábradlia</Typography>
-            <Typography>Obsah pre zábradlia...</Typography>
+            {/* <ProductGallery sections={[zabradlia]} /> */}
           </TabPanel>
 
           <TabPanel value={value} index={2}>
@@ -119,8 +136,7 @@ export default function Kovovyroba() {
           </TabPanel>
 
           <TabPanel value={value} index={4}>
-            <Typography variant="h5">Doplnky</Typography>
-            <Typography>Obsah pre doplnky...</Typography>
+            <GallerySection title="Grilovanie" images={gallery} placement="left" />
           </TabPanel>
         </Box>
       </Container>
