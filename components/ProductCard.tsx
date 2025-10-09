@@ -5,14 +5,8 @@ import {
   Typography,
   Box,
   Chip,
-  Collapse,
-  CardActions,
-  IconButton,
 } from "@mui/material";
 import { StaticImageData } from "next/image";
-import { useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import router from "next/router";
 
 interface ProductCardProps {
