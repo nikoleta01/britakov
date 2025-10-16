@@ -239,23 +239,55 @@ const Navbar: React.FC = () => {
                       </Link>
                       <Divider />
                       {item.subcategories.map((subcategory) => (
-                        <Link key={subcategory.label} href={subcategory.href}>
-                          <MenuItem
-                            onClick={handleCloseDropdown}
-                            sx={{
-                              pl: 3,
-                              color: isActive(subcategory.href)
-                                ? "primary.main"
-                                : "text.primary",
-                              "&:hover": {
-                                backgroundColor: "action.hover",
-                                color: "primary.light",
-                              },
-                            }}
-                          >
-                            <Typography>{subcategory.label}</Typography>
-                          </MenuItem>
-                        </Link>
+                        <Box key={subcategory.label}>
+                          <Link href={subcategory.href}>
+                            <MenuItem
+                              onClick={handleCloseDropdown}
+                              sx={{
+                                pl: 3,
+                                color: isActive(subcategory.href)
+                                  ? "primary.main"
+                                  : "text.primary",
+                                "&:hover": {
+                                  backgroundColor: "action.hover",
+                                  color: "primary.light",
+                                },
+                              }}
+                            >
+                              <Typography>{subcategory.label}</Typography>
+                            </MenuItem>
+                          </Link>
+                          {/* Nested subcategories */}
+                          {subcategory.subcategories && (
+                            <Box>
+                              {subcategory.subcategories.map(
+                                (nestedSub, nestedIndex) => (
+                                  <Link
+                                    key={nestedSub}
+                                    href={`${subcategory.href}?tab=${nestedIndex}`}
+                                  >
+                                    <MenuItem
+                                      onClick={handleCloseDropdown}
+                                      sx={{
+                                        pl: 5,
+                                        fontSize: "0.875rem",
+                                        color: "text.secondary",
+                                        "&:hover": {
+                                          backgroundColor: "action.hover",
+                                          color: "primary.light",
+                                        },
+                                      }}
+                                    >
+                                      <Typography variant="body2">
+                                        {nestedSub}
+                                      </Typography>
+                                    </MenuItem>
+                                  </Link>
+                                )
+                              )}
+                            </Box>
+                          )}
+                        </Box>
                       ))}
                     </Menu>
                   </Box>

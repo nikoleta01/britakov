@@ -1,7 +1,7 @@
 import Layout from "../../components/layout/Layout";
 import TitleDescriptionSection from "../../components/common/TitleDescriptionSection";
 import { Container, Grid, Typography } from "@mui/material";
-import spojovaciMaterial from "../../src/images/predajna spojovaci material.png";
+import spojovaciMaterial from "../../src/images/predajna_spojovaci_material.png";
 import Image from "next/image";
 import ContactInfoCard from "../../components/common/ContactInfoCard";
 
