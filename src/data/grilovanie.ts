@@ -7,3 +7,5 @@ export const gallery = [
   { src: image2, alt: "Grilovanie 2" },
   { src: image3, alt: "Grilovanie 3" },
 ];
+
+export default {};

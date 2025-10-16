@@ -5,9 +5,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ProductGallery from "../../components/ProductGallery";
 import TabPanel from "../../components/TabPanel";
-// import zabradlia from "./zabradlia";
 import GallerySection from "../../components/GallerySection";
-import { gallery } from "./grilovanie";
+import { gallery } from "../../src/data/grilovanie";
 
 const gallerySections = [
   {
@@ -123,6 +122,7 @@ export default function Kovovyroba() {
 
           <TabPanel value={value} index={1}>
             {/* <ProductGallery sections={[zabradlia]} /> */}
+            <ProductGallery sections={gallerySections} />
           </TabPanel>
 
           <TabPanel value={value} index={2}>
@@ -136,7 +136,7 @@ export default function Kovovyroba() {
           </TabPanel>
 
           <TabPanel value={value} index={4}>
-            <GallerySection title="Grilovanie" images={gallery} placement="left" />
+            <GallerySection title="Grilovanie" images={gallery} />
           </TabPanel>
         </Box>
       </Container>

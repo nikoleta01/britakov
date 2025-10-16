@@ -15,13 +15,11 @@ interface GallerySection {
     src: StaticImageData;
     alt: string;
   }[];
-  placement: "left" | "right";
 }
 
 const GallerySection: React.FC<GallerySection> = ({
   title,
   images,
-  placement,
 }: GallerySection) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);

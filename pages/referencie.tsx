@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import { humenneImages } from "./reference-images";
+import { humenneImages } from "../src/data/reference-images";
 import Layout from "../components/layout/Layout";
 import TitleDescriptionSection from "../components/common/TitleDescriptionSection";
 import ReferenceGallery from "../components/ReferenceGallery";
